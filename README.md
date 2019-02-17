@@ -1,2 +1,2 @@
 # Word-Fragment-Organizer
-A simple word and number fragment organizer using nodes.
+Message and number fragment organizer. Helps to unscramble words.
