@@ -21,22 +21,23 @@ int main() {
         int input{0};
         std::string frag;
 
-        while (input != -2) //would accept input
+        while (input != -2) 
         {
-
+                //takes input
                 std::cin >> input;
 
-
-                if (input >= 0) //would insert the word fragments as recieved and order them
+                //inserts the word fragments as recieved and orders them
+                if (input >= 0) 
                 {
                         std::cin  >> frag;
                         one.insert(input,frag);
 
                 }
-
+                
+                //would print the message so far recieved
                 if (input == -1)
                 {
-                        one.print_message(); //would print the message so far recieved
+                        one.print_message(); 
                 }
         }
 
@@ -46,16 +47,18 @@ int main() {
 }
 #endif
 
-Message::Message()    //node constructor
+//node constructor
+Message::Message()    
 {
         head=nullptr;
 }
 
-Message::~Message()   //node deconstructor
+//node deconstructor
+Message::~Message()   
 {
         Node *p_head{head};
 
-
+        //deconstructs the nodes 
         while (p_head != nullptr)
         {
                 Node *temp_node{p_head};
@@ -69,20 +72,23 @@ Message::~Message()   //node deconstructor
 
 }
 
-void Message::insert( unsigned int id, std::string fragment)    //inserts a node into the list and orders it
+ //inserts a node into the list and orders it
+void Message::insert( unsigned int id, std::string fragment) 
 {
-
+        //if its going to be the head of the node
         if (head == nullptr)
         {
                 head = new Node(id,fragment);
                 head->p_next = nullptr;
         }
+        //inserts the node in the proper location
         else if (id < head->identifier)
         {
                 Node *temp_node{new Node(id,fragment)};
                 temp_node->p_next= head;
                 head = temp_node;
         }
+        //assings temp nodes to move things around
         else
         {
                 Node *p_head{head};
@@ -102,7 +108,8 @@ void Message::insert( unsigned int id, std::string fragment)    //inserts a node
 
 }
 
-void Message::print_message()   //prints the messaged so far recieved
+//prints the message so far recieved
+void Message::print_message() 
 {
 
         unsigned int counter{0};
@@ -112,12 +119,14 @@ void Message::print_message()   //prints the messaged so far recieved
         {
 
                 temp_node = p_head;
-
+                
+                //prints dots
                 for(unsigned int count{0}; count < (p_head->identifier - counter); ++count )
                 {
                         std::cout <<"... ";
                 }
 
+                //prints EOT if the entire fragment hasn't been recieved yet 
                 if (p_head->get_fragment() != "EOT")
                 {
                         std::cout << p_head->get_fragment() << " ";
@@ -126,6 +135,7 @@ void Message::print_message()   //prints the messaged so far recieved
                 counter = (p_head->identifier ) + 1;
 
         }
+        //missing fragment
         if (temp_node == nullptr || temp_node->fragment != "EOT")
         {
                 std::cout <<"???";
@@ -134,7 +144,8 @@ void Message::print_message()   //prints the messaged so far recieved
         std::cout<< std::endl;
 }
 
-Node::Node(unsigned int id, std::string frag )    //constructs the node
+//constructs the node 
+Node::Node(unsigned int id, std::string frag )
 {
         identifier = id;
         fragment = frag;
@@ -142,12 +153,14 @@ Node::Node(unsigned int id, std::string frag )    //constructs the node
 
 }
 
-Node *Node::get_next()    //gets the next node
+//gets the next node 
+Node *Node::get_next()
 {
         return p_next;
 }
 
-std::string Node::get_fragment()    //returns the word fragment
+//returns the word fragment 
+std::string Node::get_fragment() 
 {
 
         return fragment;
